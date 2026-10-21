@@ -169,6 +169,7 @@ main {
   border-radius: 0.5rem;
   background-color: var(--color-secondary);
   color: var(--color-dark);
+  font-family: inherit;
   font-weight: bold;
   font-size: 1rem;
   cursor: pointer;
@@ -404,6 +405,28 @@ main {
 
 .testimonial p {
   margin: 0;
+}
+
+/* ---------- Booking form ---------- */
+.booking-form {
+  display: grid;
+  max-width: 24rem;
+  gap: 20px;
+  margin-top: 1.5rem;
+}
+
+.booking-form label {
+  font-weight: 700;
+}
+
+.booking-form input,
+.booking-form select {
+  padding: 0.5rem 0.75rem;
+  border: 1px solid #b3b3b3;
+  border-radius: 0.25rem;
+  font-family: inherit;
+  font-size: 1rem;
+  background-color: #ffffff;
 }
 
 /* ---------- Booking page ---------- */
