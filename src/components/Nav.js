@@ -1,25 +1,23 @@
+import { Link } from "react-router-dom";
+
+const links = [
+  { label: "Home", to: "/" },
+  { label: "About", to: "/about" },
+  { label: "Menu", to: "/menu" },
+  { label: "Reservations", to: "/booking" },
+  { label: "Order Online", to: "/order" },
+  { label: "Login", to: "/login" },
+];
+
 function Nav() {
   return (
     <nav aria-label="Main">
       <ul className="nav-list">
-        <li>
-          <a href="/">Home</a>
-        </li>
-        <li>
-          <a href="/about">About</a>
-        </li>
-        <li>
-          <a href="/menu">Menu</a>
-        </li>
-        <li>
-          <a href="/reservations">Reservations</a>
-        </li>
-        <li>
-          <a href="/order">Order Online</a>
-        </li>
-        <li>
-          <a href="/login">Login</a>
-        </li>
+        {links.map((link) => (
+          <li key={link.to}>
+            <Link to={link.to}>{link.label}</Link>
+          </li>
+        ))}
       </ul>
     </nav>
   );

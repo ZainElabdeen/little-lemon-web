@@ -23,9 +23,65 @@ body {
   color: var(--color-dark);
 }
 
+/* ---------- Typography (style guide: Markazi Text + Karla) ---------- */
+h1,
+h2,
+h3,
+h4,
+h5,
+h6 {
+  font-family: "Markazi Text", "Segoe UI", "Oxygen", sans-serif;
+  line-height: 1.1;
+  margin-top: 0;
+}
+
+h1 {
+  font-size: 4rem;
+}
+
+h2 {
+  font-size: 2.5rem;
+}
+
+h3 {
+  font-size: 1.75rem;
+}
+
+h4 {
+  font-size: 1.25rem;
+}
+
+h5 {
+  font-size: 1rem;
+}
+
+h6 {
+  font-size: 0.875rem;
+}
+
+p {
+  margin: 0 0 1rem;
+  line-height: 1.5;
+}
+
+span {
+  line-height: 1.5;
+}
+
+.overline {
+  display: block;
+  font-weight: 700;
+  font-size: 0.75rem;
+  letter-spacing: 1px;
+  text-transform: uppercase;
+  margin-bottom: 0.5rem;
+}
+
 img {
   max-width: 100%;
+  height: auto;
   display: block;
+  border-radius: 0.5rem;
 }
 
 /* ---------- Header (Flexbox) ---------- */
@@ -42,6 +98,7 @@ img {
 .header-logo {
   height: 3.5rem;
   width: auto;
+  border-radius: 0;
 }
 
 /* ---------- Navigation (Flexbox) ---------- */
@@ -154,6 +211,13 @@ main {
   border-radius: 0.5rem;
   overflow: hidden;
   background-color: #ffffff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+  transition: transform 0.15s ease, box-shadow 0.15s ease;
+}
+
+.card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
 /* Placeholder for the dish photo — swap for an <img> when you add one */
@@ -278,12 +342,95 @@ main {
 .footer-logo {
   height: 3rem;
   width: auto;
+  border-radius: 0;
+}
+
+/* ---------- Testimonials (Grid: 2 columns → 1 on mobile) ---------- */
+.testimonials {
+  padding: 3rem 2rem;
+  background-color: var(--color-dark);
+  color: var(--color-light);
+}
+
+.testimonials h2 {
+  color: var(--color-secondary);
+  text-align: center;
+}
+
+.testimonials-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 1.5rem;
+}
+
+.testimonial {
+  background-color: #ffffff;
+  color: var(--color-dark);
+  border-radius: 0.5rem;
+  padding: 1.5rem;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.25);
+}
+
+.testimonial-header {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  margin-bottom: 0.75rem;
+}
+
+.testimonial-avatar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  width: 3rem;
+  height: 3rem;
+  border-radius: 50%;
+  background-color: var(--color-secondary);
+  color: var(--color-dark);
+  font-weight: 700;
+  font-size: 1.25rem;
+}
+
+.testimonial-header h3 {
+  margin: 0;
+  font-size: 1.25rem;
+}
+
+.testimonial-rating {
+  color: #b38600;
+  letter-spacing: 2px;
+}
+
+.testimonial p {
+  margin: 0;
+}
+
+/* ---------- Booking page ---------- */
+.booking {
+  padding: 3rem 2rem;
+  max-width: 40rem;
+  margin: 0 auto;
+}
+
+/* ---------- Not found ---------- */
+.not-found {
+  padding: 3rem 2rem;
+  text-align: center;
 }
 
 /* ============================================================
    Mobile: stack every column at ≤ 768px
    ============================================================ */
 @media (max-width: 768px) {
+  h1 {
+    font-size: 3rem;
+  }
+
+  h2 {
+    font-size: 2rem;
+  }
+
   .header {
     justify-content: center;
   }
@@ -299,6 +446,10 @@ main {
   }
 
   .specials-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .testimonials-grid {
     grid-template-columns: 1fr;
   }
 
