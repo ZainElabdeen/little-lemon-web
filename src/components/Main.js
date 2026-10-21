@@ -2,22 +2,7 @@ import { useReducer } from "react";
 import { Routes, Route } from "react-router-dom";
 import Homepage from "./Homepage";
 import BookingPage from "./BookingPage";
-
-const initializeTimes = () => {
-  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-};
-
-const updateTimes = (state, action) => {
-  switch (action.type) {
-    case "date_change":
-      // For now, the same seating times are available regardless of the
-      // selected date (action.payload holds the newly selected date). This is
-      // where a call to the reservations API will go in a future exercise.
-      return initializeTimes();
-    default:
-      return state;
-  }
-};
+import { initializeTimes, updateTimes } from "./bookingTimes";
 
 function Main() {
   // The third useReducer argument is the lazy initializer: initializeTimes is
