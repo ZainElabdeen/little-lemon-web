@@ -1,10 +1,21 @@
 import { useState } from "react";
 
-function BookingForm({ availableTimes, dispatchAvailableTimes }) {
+function BookingForm({ availableTimes, dispatchAvailableTimes, submitForm }) {
   const [date, setDate] = useState("");
   const [time, setTime] = useState(availableTimes[0]);
   const [guests, setGuests] = useState("");
   const [occasion, setOccasion] = useState("Birthday");
+
+  const today = new Date().toISOString().split("T")[0];
+
+  // React-side validation: the submit button stays disabled until every
+  // field holds a valid value. The HTML5 attributes on the inputs (required,
+  // min, max) provide a second, independent layer of validation.
+  const isDateValid = date !== "" && date >= today;
+  const isTimeValid = time !== "";
+  const isGuestsValid =
+    guests !== "" && Number(guests) >= 1 && Number(guests) <= 10;
+  const isFormValid = isDateValid && isTimeValid && isGuestsValid;
 
   const handleDateChange = (e) => {
     const selectedDate = e.target.value;
@@ -14,12 +25,12 @@ function BookingForm({ availableTimes, dispatchAvailableTimes }) {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    // Ready to send { date, time, guests, occasion } to the API in a future
-    // exercise. For now, just log the reservation request.
-    console.log("Reservation requested:", { date, time, guests, occasion });
+    // Guard against submissions that bypass the disabled button (e.g. the
+    // Enter key) while a field is invalid.
+    if (!isFormValid) return;
+    const formData = { date, time, guests, occasion };
+    submitForm(formData);
   };
-
-  const today = new Date().toISOString().split("T")[0];
 
   return (
     <form className="booking-form" onSubmit={handleSubmit}>
@@ -38,6 +49,7 @@ function BookingForm({ availableTimes, dispatchAvailableTimes }) {
         id="res-time"
         value={time}
         onChange={(e) => setTime(e.target.value)}
+        required
       >
         {availableTimes.map((availableTime) => (
           <option key={availableTime} value={availableTime}>
@@ -63,12 +75,18 @@ function BookingForm({ availableTimes, dispatchAvailableTimes }) {
         id="occasion"
         value={occasion}
         onChange={(e) => setOccasion(e.target.value)}
+        required
       >
         <option>Birthday</option>
         <option>Anniversary</option>
       </select>
 
-      <input type="submit" value="Make Your reservation" className="button" />
+      <input
+        type="submit"
+        value="Make Your reservation"
+        className="button"
+        disabled={!isFormValid}
+      />
     </form>
   );
 }

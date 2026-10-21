@@ -26,7 +26,7 @@ function Specials() {
     <section className="specials">
       <div className="specials-header">
         <h2>This week&rsquo;s specials</h2>
-        <Link to="/menu" className="button">
+        <Link to="/menu" className="button" aria-label="On Click">
           Online Menu
         </Link>
       </div>

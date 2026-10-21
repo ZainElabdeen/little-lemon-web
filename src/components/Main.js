@@ -1,7 +1,8 @@
 import { useReducer } from "react";
-import { Routes, Route } from "react-router-dom";
+import { Routes, Route, useNavigate } from "react-router-dom";
 import Homepage from "./Homepage";
 import BookingPage from "./BookingPage";
+import ConfirmedBooking from "./ConfirmedBooking";
 import { initializeTimes, updateTimes } from "./bookingTimes";
 
 function Main() {
@@ -13,6 +14,17 @@ function Main() {
     null,
     initializeTimes
   );
+  const navigate = useNavigate();
+
+  // Submits the reservation to the API and navigates to the confirmation
+  // page when the API accepts it.
+  const submitForm = (formData) => {
+    if (window.submitAPI(formData)) {
+      navigate("/confirmed");
+      return true;
+    }
+    return false;
+  };
 
   return (
     <main>
@@ -24,9 +36,11 @@ function Main() {
             <BookingPage
               availableTimes={availableTimes}
               dispatchAvailableTimes={dispatchAvailableTimes}
+              submitForm={submitForm}
             />
           }
         />
+        <Route path="/confirmed" element={<ConfirmedBooking />} />
         <Route
           path="*"
           element={

@@ -1,18 +1,21 @@
-// Pure functions for the booking times state, kept outside of the Main
-// component so they can be unit tested without rendering React (and without
-// pulling in react-router-dom, which CRA's jest cannot resolve).
+// Booking times logic, backed by the booking API (public/api.js, which the
+// page loads as a script and exposes as window.fetchAPI). The API is
+// synchronous: it returns an array of available reservation times for the
+// given Date.
+
+const parseDateString = (dateString) => new Date(`${dateString}T00:00:00`);
 
 export const initializeTimes = () => {
-  return ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
+  const today = new Date();
+  return window.fetchAPI(today);
 };
 
 export const updateTimes = (state, action) => {
   switch (action.type) {
     case "date_change":
-      // For now, the same seating times are available regardless of the
-      // selected date (action.payload holds the newly selected date). This is
-      // where a call to the reservations API will go in a future exercise.
-      return initializeTimes();
+      // action.payload is the selected date string ("YYYY-MM-DD") from the
+      // form; the API expects a Date object.
+      return window.fetchAPI(parseDateString(action.payload));
     default:
       return state;
   }

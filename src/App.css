@@ -181,6 +181,12 @@ main {
   background-color: #e6bb10;
 }
 
+.button:disabled {
+  background-color: #cccccc;
+  color: #666666;
+  cursor: not-allowed;
+}
+
 /* ---------- Specials (Grid: 3 cards → 1 on mobile) ---------- */
 .specials {
   padding: 3rem 2rem;
