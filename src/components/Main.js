@@ -17,8 +17,13 @@ function Main() {
   const navigate = useNavigate();
 
   // Submits the reservation to the API and navigates to the confirmation
-  // page when the API accepts it.
+  // page when the API accepts it. Returns false (so the form can show an
+  // error) when the API is unavailable or rejects the reservation.
   const submitForm = (formData) => {
+    if (typeof window.submitAPI !== "function") {
+      console.warn("Booking API unavailable (public/api.js not loaded).");
+      return false;
+    }
     if (window.submitAPI(formData)) {
       navigate("/confirmed");
       return true;

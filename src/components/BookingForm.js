@@ -5,6 +5,7 @@ function BookingForm({ availableTimes, dispatchAvailableTimes, submitForm }) {
   const [time, setTime] = useState(availableTimes[0]);
   const [guests, setGuests] = useState("");
   const [occasion, setOccasion] = useState("Birthday");
+  const [submitError, setSubmitError] = useState("");
 
   const today = new Date().toISOString().split("T")[0];
 
@@ -29,7 +30,15 @@ function BookingForm({ availableTimes, dispatchAvailableTimes, submitForm }) {
     // Enter key) while a field is invalid.
     if (!isFormValid) return;
     const formData = { date, time, guests, occasion };
-    submitForm(formData);
+    if (submitForm(formData)) {
+      setSubmitError("");
+    } else {
+      // The API rejected the reservation or is unavailable: keep the user on
+      // the form and tell them what happened.
+      setSubmitError(
+        "Sorry, we couldn't complete your reservation. Please try again."
+      );
+    }
   };
 
   return (
@@ -87,6 +96,12 @@ function BookingForm({ availableTimes, dispatchAvailableTimes, submitForm }) {
         className="button"
         disabled={!isFormValid}
       />
+
+      {submitError && (
+        <p className="form-error" role="alert">
+          {submitError}
+        </p>
+      )}
     </form>
   );
 }

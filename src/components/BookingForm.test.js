@@ -3,7 +3,7 @@ import BookingForm from "./BookingForm";
 
 const availableTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
 const dispatchAvailableTimes = jest.fn();
-const submitForm = jest.fn();
+const submitForm = jest.fn(() => true);
 
 const renderBookingForm = () =>
   render(
@@ -14,8 +14,21 @@ const renderBookingForm = () =>
     />
   );
 
+// Fills in a valid date and guest count so the form can be submitted.
+const fillValidForm = () => {
+  fireEvent.change(screen.getByLabelText("Choose date"), {
+    target: { value: "2030-01-01" },
+  });
+  fireEvent.change(screen.getByLabelText("Number of guests"), {
+    target: { value: "4" },
+  });
+};
+
 beforeEach(() => {
+  // clearAllMocks() also drops the mock's implementation, so restore the
+  // happy-path return value (the API accepting the reservation) explicitly.
   jest.clearAllMocks();
+  submitForm.mockReturnValue(true);
 });
 
 test("Renders the BookingForm static labels", () => {
@@ -102,5 +115,26 @@ describe("form submission", () => {
     // must not reach submitForm.
     fireEvent.submit(container.querySelector("form"));
     expect(submitForm).not.toHaveBeenCalled();
+  });
+
+  test("shows an error message when the API rejects the reservation", () => {
+    submitForm.mockReturnValueOnce(false);
+    const { container } = renderBookingForm();
+    fillValidForm();
+    fireEvent.submit(container.querySelector("form"));
+    expect(submitForm).toHaveBeenCalled();
+    expect(screen.getByRole("alert")).toHaveTextContent(
+      /couldn't complete your reservation/i
+    );
+    expect(submitForm).toHaveReturnedWith(false);
+  });
+
+  test("shows no error message when the reservation is accepted", () => {
+    const { container } = renderBookingForm();
+    fillValidForm();
+    fireEvent.submit(container.querySelector("form"));
+    expect(submitForm).toHaveBeenCalled();
+    expect(submitForm).toHaveReturnedWith(true);
+    expect(screen.queryByRole("alert")).not.toBeInTheDocument();
   });
 });

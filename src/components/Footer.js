@@ -1,8 +1,4 @@
 function Footer() {
-  console.log(
-    "Footer component rendered",
-    `${process.env.PUBLIC_URL}/images/Logo.svg`,
-  );
   return (
     <footer className="footer">
       <div>

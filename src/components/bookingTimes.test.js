@@ -18,6 +18,13 @@ describe("initializeTimes", () => {
     expect(window.fetchAPI).toHaveBeenCalledTimes(1);
     expect(window.fetchAPI).toHaveBeenCalledWith(expect.any(Date));
   });
+
+  test("falls back to default times when the API is unavailable", () => {
+    delete window.fetchAPI;
+    const times = initializeTimes();
+    expect(Array.isArray(times)).toBe(true);
+    expect(times.length).toBeGreaterThan(0);
+  });
 });
 
 describe("updateTimes", () => {
@@ -37,5 +44,15 @@ describe("updateTimes", () => {
     });
     expect(window.fetchAPI).toHaveBeenCalledWith(expect.any(Date));
     expect(newState).toEqual(mockTimes);
+  });
+
+  test("falls back to default times when the API is unavailable", () => {
+    delete window.fetchAPI;
+    const times = updateTimes([], {
+      type: "date_change",
+      payload: "2026-10-25",
+    });
+    expect(Array.isArray(times)).toBe(true);
+    expect(times.length).toBeGreaterThan(0);
   });
 });

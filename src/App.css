@@ -188,6 +188,12 @@ main {
   cursor: not-allowed;
 }
 
+.form-error {
+  margin: 0.75rem 0 0;
+  color: #b3261e;
+  font-weight: bold;
+}
+
 /* ---------- Specials (Grid: 3 cards → 1 on mobile) ---------- */
 .specials {
   padding: 3rem 2rem;
