@@ -1,15 +1,16 @@
 import { useState } from "react";
 
-const initialTimes = ["17:00", "18:00", "19:00", "20:00", "21:00", "22:00"];
-
-function BookingForm() {
+function BookingForm({ availableTimes, dispatchAvailableTimes }) {
   const [date, setDate] = useState("");
-  const [time, setTime] = useState(initialTimes[0]);
+  const [time, setTime] = useState(availableTimes[0]);
   const [guests, setGuests] = useState("");
   const [occasion, setOccasion] = useState("Birthday");
-  // Stateful array of available seating times. In a future exercise this will
-  // be fetched from the reservations API whenever the date changes.
-  const [availableTimes] = useState(initialTimes);
+
+  const handleDateChange = (e) => {
+    const selectedDate = e.target.value;
+    setDate(selectedDate);
+    dispatchAvailableTimes({ type: "date_change", payload: selectedDate });
+  };
 
   const handleSubmit = (e) => {
     e.preventDefault();
@@ -28,7 +29,7 @@ function BookingForm() {
         id="res-date"
         value={date}
         min={today}
-        onChange={(e) => setDate(e.target.value)}
+        onChange={handleDateChange}
         required
       />
 
