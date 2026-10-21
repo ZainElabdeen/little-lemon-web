@@ -153,12 +153,13 @@ main {
   line-height: 1.5;
 }
 
-/* Placeholder for the hero photo — swap for an <img> when you add one */
+/* Hero photo (same shot the app's banner uses) */
 .hero-image {
-  min-height: 16rem;
+  display: block;
+  width: 100%;
+  height: 22rem;
+  object-fit: cover;
   border-radius: 1rem;
-  background-color: var(--color-light);
-  background-image: linear-gradient(135deg, var(--color-peach), var(--color-secondary));
 }
 
 .button {
@@ -227,11 +228,12 @@ main {
   box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
 }
 
-/* Placeholder for the dish photo — swap for an <img> when you add one */
+/* Dish photo (card top; top corners rounded by .card overflow: hidden) */
 .card-image {
+  display: block;
+  width: 100%;
   height: 10rem;
-  background-color: var(--color-light);
-  background-image: linear-gradient(135deg, var(--color-peach), var(--color-secondary));
+  object-fit: cover;
 }
 
 .card-body {
@@ -297,12 +299,13 @@ main {
   max-width: 45ch;
 }
 
-/* Placeholder for the owners' photo — swap for an <img> when you add one */
+/* Owners' photo */
 .about-image {
-  min-height: 16rem;
+  display: block;
+  width: 100%;
+  height: 18rem;
+  object-fit: cover;
   border-radius: 1rem;
-  background-color: #ffffff;
-  background-image: linear-gradient(135deg, var(--color-peach), var(--color-secondary));
 }
 
 /* ---------- Footer (Grid columns → stacked on mobile) ---------- */
@@ -472,6 +475,11 @@ main {
   .about {
     grid-template-columns: 1fr;
     text-align: left;
+  }
+
+  .hero-image,
+  .about-image {
+    height: 16rem;
   }
 
   .specials-grid {

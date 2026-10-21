@@ -1,14 +1,14 @@
 function Footer() {
   console.log(
     "Footer component rendered",
-    `${process.env.PUBLIC_URL}/images/logo.svg`,
+    `${process.env.PUBLIC_URL}/images/Logo.svg`,
   );
   return (
     <footer className="footer">
       <div>
         <img
           className="footer-logo"
-          src={`${process.env.PUBLIC_URL}/images/logo.svg`}
+          src={`${process.env.PUBLIC_URL}/images/Logo.svg`}
           alt="Little Lemon logo"
         />
         <p>Family owned Mediterranean restaurant in the heart of Chicago.</p>

@@ -5,7 +5,7 @@ function Header() {
     <header className="header">
       <img
         className="header-logo"
-        src={`${process.env.PUBLIC_URL}/images/logo.svg`}
+        src={`${process.env.PUBLIC_URL}/images/Logo.svg`}
         alt="Little Lemon logo"
       />
       <Nav />

@@ -10,10 +10,10 @@ function Chicago() {
           Mediterranean-inspired recipes, made fresh every day by our chefs.
         </p>
       </div>
-      <div
+      <img
         className="about-image"
-        role="img"
-        aria-label="The owners of Little Lemon"
+        src={`${process.env.PUBLIC_URL}/images/restaurant chef B.jpg`}
+        alt="The owners of Little Lemon"
       />
     </section>
   );

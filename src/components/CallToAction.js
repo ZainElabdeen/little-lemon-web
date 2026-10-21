@@ -14,10 +14,10 @@ function CallToAction() {
           Reserve a table
         </Link>
       </div>
-      <div
+      <img
         className="hero-image"
-        role="img"
-        aria-label="A selection of Little Lemon's Mediterranean dishes"
+        src={`${process.env.PUBLIC_URL}/images/restauranfood.jpg`}
+        alt="A selection of Little Lemon's Mediterranean dishes"
       />
     </section>
   );
